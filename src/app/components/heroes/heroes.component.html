@@ -1,19 +1,14 @@
+<!-- Heroes components es PADRE de HeroCard component -->
 <div class="fast fadeIn">
   <h2 class="display-4 pb-4">Heroes <small>DC & MARVEL</small></h2>
 
   <div class="card-columns">
     <!-- La declaración let i = index guarda y contabiliza cada iteración del ngFor -->
-    <div class="card fadeIn animated border p-2"
-    *ngFor="let hero of arrayHeroes; let i = index" 
-    [ngClass]="{'border-primary': hero.casa == 'DC', 'border-danger': hero.casa == 'Marvel'}">
-      <img src="../../../{{ hero.img }}" class="card-img-top animated fadeIn" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">{{ hero.nombre }}</h5>
-        <p class="card-text">{{ hero.bio.substring(0, 100) }}...</p>
-        <small>{{ hero.aparicion }}</small>
-      </div>
-      <!-- [routerLink]="['/hero', i]" La coma en routerLink se usa para mandar parámetros, en este caso se pasa el índice como parámetro de la ruta -->
-      <button class="btn btn-outline-success btn-block col-12" (click)="navegar(i)">Ver más...</button>
-    </div>
+
+    <!-- Componente HIJO de HeroesComponent -->
+    <app-hero-card [PadreHero]="hero"
+    [Index]="i"
+    *ngFor="let hero of arrayHeroes; let i = index"></app-hero-card>
   </div>
+
 </div>

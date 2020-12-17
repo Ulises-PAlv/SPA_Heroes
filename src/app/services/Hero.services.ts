@@ -1,5 +1,9 @@
 import { from } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams, HttpUrlEncodingCodec } from '@angular/common/http';
+
+// ?? RxJS
+import { map } from 'rxjs/operators';
 
 // Root
 @Injectable({
@@ -8,6 +12,37 @@ import { Injectable } from '@angular/core';
 
 export class HeroService {
 
+    constructor( private _http: HttpClient ) {
+        console.log('HeroService Works...');
+    }
+
+    getQuery(query: string) {
+        const url = `http://localhost:3000/${query}`;
+
+        return this._http.get(url);
+    }
+
+    getHeroes() {
+        return this.getQuery('heroes').pipe(map( data => {
+            return data;
+        }));
+    }
+
+    getHeroe(id: string) {
+        return this.getQuery(`heroe/${id}`).pipe(map( data => {
+            return data;
+        }));
+    }
+
+    searchHeroes(term) {
+        const url = `http://localhost:3000/heroesTerm?termino=${term}`;
+
+        return this._http.get(url).pipe(map( data => {
+            return data;
+        }));
+    }
+
+    /*
     private heroes: any[] = [
             {
                 nombre: "Aquaman",
@@ -60,10 +95,6 @@ export class HeroService {
             }
     ];
 
-    constructor() {
-        console.log('HeroServiceWorks');
-    }
-
     public getHeroes(){
         return this.heroes;
     }
@@ -77,13 +108,15 @@ export class HeroService {
         let resultados: any = [];
         termino = termino.toLowerCase();
         // usar un ciclo para comparar el termino de busqueda contra la propiedad nombre de c/heroe
-        for(const hero of this.heroes) {
+        for(let i = 0; i< this.heroes.length; i++) {
+            let hero = this.heroes[i];
             const nombre = hero.nombre.toLowerCase();
             if(nombre.indexOf(termino) >= 0) { // metodo que busca coincidencias en la cadena grande
+                hero.index = i;
                 resultados.push(hero);
             }
         }
 
         return resultados;
-    }
+    }*/
 }

@@ -11,13 +11,17 @@ export class HeroComponent implements OnInit {
 
   // Variable que almcanena la respuesta de metodo que se encuentra en el servicio _heroService
   hero: any = {};
+  id = '';
 
   constructor(private _router:ActivatedRoute, private _heroService: HeroService) { 
     this._router.params.subscribe( params => {
-      console.log(params['id']);
-      this.hero = this._heroService.getHero(params['id']);
-      console.log(this.hero);
-    } );
+      this.id = (parseInt(params['id']) + 1).toString();
+      console.log(this.id);
+    });
+
+    this._heroService.getHeroe(this.id).subscribe((data: any) => {
+      this.hero = data;
+    });
   }
 
   ngOnInit(): void {

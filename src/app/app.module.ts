@@ -13,6 +13,12 @@ import { RouterModule } from '@angular/router';
 import { Error404Component } from './components/error404/error404.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
+import { HeroCardComponent } from './components/hero-card/hero-card.component';
+import { PipesComponent } from './components/pipes/pipes.component';
+import { CapitalizadoPipe } from './pipes/capitalizado/capitalizado.pipe';
+import { DomSeguroPipe } from './pipes/DomSeguro/dom-seguro.pipe';
+import { PasswordPipe } from './pipes/password/password.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,10 +30,16 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     HomeComponent,
     Error404Component,
     HeroComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    HeroCardComponent,
+    PipesComponent,
+    CapitalizadoPipe,
+    DomSeguroPipe,
+    PasswordPipe
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'home', component: HomeComponent},
@@ -36,8 +48,8 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
       // Gracias al /: parametros nuestra ruta se prepara para decidir un parámetro o un valor dinámico
       {path: 'hero/:id', component: HeroComponent},
       {path: 'results/:termino', component: BuscadorComponent},
+      {path: 'pipes', component: PipesComponent},
       {path: '**', pathMatch: 'full', component: Error404Component}
-      
     ])
   ],
   providers: [],

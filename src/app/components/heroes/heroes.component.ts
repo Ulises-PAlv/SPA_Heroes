@@ -10,17 +10,18 @@ import { Router } from '@angular/router';
 })
 export class HeroesComponent implements OnInit {
 
-  arrayHeroes:any[] = [];
+  arrayHeroes: any= [];
 
   constructor(private _heroService: HeroService, private _router: Router) {
-    
+    this._heroService.getHeroes().subscribe( (data: any) => {
+      this.arrayHeroes = data;
+      
+      console.log(this.arrayHeroes);
+    });
   }
 
   // Se ejcuta en cuanto se termina de rederizar el componente
-  ngOnInit(): void {
-    // console.log(this._heroService.getHeroes());
-    this.arrayHeroes = this._heroService.getHeroes();
-  }
+  ngOnInit(): void { }
 
   navegar (index) {
     this._router.navigate(['/hero', index]);

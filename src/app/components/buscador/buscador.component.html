@@ -9,17 +9,11 @@
     </div>
 
     <div *ngIf="!arrayVacio()">
-        <h2 class="display-4 pb-4">Heroes <small>DC & MARVEL... Resultados para '{{strBusqueda}}'</small></h2>
-        <div class="card-columns animated fadeIn">
-            <div class="card" *ngFor="let hero of Resultados;">
-                <img src="../../../{{ hero.img }}" class="card-img-top animated fadeIn" alt="..." />
-                <div class="card-body">
-                <h5 class="card-title">{{ hero.nombre }}</h5>
-                <p class="card-text">{{ hero.bio.substring(0, 100) }}...</p>
-                <small>{{ hero.aparicion }}</small>
-                </div>
-    
-                <button class="btn btn-outline-success btn-block">Ver más...</button>
+        <div class="row">
+            <div class="card-columns">
+                <app-hero-card [PadreHero]="hero"
+                [Index]="hero.index"
+                *ngFor="let hero of Resultados; let i = index;"></app-hero-card>
             </div>
         </div>
     </div>
